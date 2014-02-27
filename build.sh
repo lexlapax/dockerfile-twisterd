@@ -11,7 +11,7 @@ apt-get update
 apt-get install libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc8=1.6-3ubuntu1 libminiupnpc-dev -y 
 
 # get and build from source
-mkdir -p /usr/local/src ~/.twister 
+mkdir -p /usr/local/src /root/.twister 
 cd /usr/local/src 
 git clone https://github.com/miguelfreitas/twister-core.git
 git clone https://github.com/miguelfreitas/twister-html.git
@@ -21,11 +21,12 @@ cd /usr/local/src/twister-core
 make V=1 
 make install-binPROGRAMS 
 
-cd ~/.twister 
+cd /root/.twister 
 mv /usr/local/src/twister-html ./html 
-echo "rpcuser=user" >> ~/.twister/twister.conf 
-echo "rpcpassword=pwd" >> ~/.twister/twister.conf
-echo "rpcallowip=*.*.*.*" >> ~/.twister/twister.conf 
+cd /root
+echo "rpcuser=user" >> /root/.twister/twister.conf 
+echo "rpcpassword=pwd" >> /root/.twister/twister.conf
+echo "rpcallowip=*.*.*.*" >> /root/.twister/twister.conf 
 
 # clean up
 rm -rf /usr/local/src/twister-core
