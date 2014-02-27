@@ -15,7 +15,7 @@ A docker encapsulation of twister peer-to-peer microblogging service available a
 
 was built from source at https://github.com/miguelfreitas/twister-core using instructions from http://twister.net.co/?page_id=23 
 
-uses ubuntu precise (12.04) as a base build image
+uses ubuntu precise (12.04) as a base build image, the build scripts (Dockerfile /build.sh ) were refactored to reduce the end image size of the image
 
 starts up twisterd as root using configs in root's ~/.twister/twister.conf ..
 allows rpc from *any* host by default, if not desired, the "rpcallowip" value can be changed to one's liking
