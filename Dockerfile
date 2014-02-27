@@ -1,26 +1,24 @@
 # build twister from source
 # see accompanying README.md
 # and upstream source instructions http://twister.net.co/
-FROM ubuntu:precise
+FROM lapax/precise-dev
 MAINTAINER Lex Lapax <lexlapax@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
-RUN echo "deb http://archive.ubuntu.com/ubuntu precise main universe" > /etc/apt/sources.list
 RUN \ 
-	apt-get update ;\
-	apt-get upgrade -y ;\
-	apt-get install build-essential libtool libssl-dev libboost-all-dev python-distutils-extra python-software-properties libminiupnpc8 wget git -y ;\
 	add-apt-repository -y ppa:bitcoin/bitcoin ;\
 	apt-get update ;\
-	apt-get install libdb4.8-dev libdb4.8++-dev libminiupnpc-dev -y 
+	apt-get install libboost-all-dev libdb4.8-dev libdb4.8++-dev libminiupnpc8=1.6-3ubuntu1 libminiupnpc-dev -y 
 
 RUN \
 	mkdir -p /usr/local/src ~/.twister ;\
 	cd /usr/local/src; \
 	git clone https://github.com/miguelfreitas/twister-core.git ;\
-	git clone https://github.com/miguelfreitas/twister-html.git ;\
+	git clone https://github.com/miguelfreitas/twister-html.git
+
+RUN \
 	cd /usr/local/src/twister-core ;\
 	./bootstrap.sh --enable-logging --enable-debug --enable-statistics ;\
-	make ;\
+	make V=1 ;\
 	make install-binPROGRAMS 
 
 RUN \
